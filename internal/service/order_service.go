@@ -1,17 +1,22 @@
 package service
 
 import (
+	"strconv"
+
 	"github.com/Pasca11/waterHTTPServer/internal/model"
 	"github.com/Pasca11/waterHTTPServer/internal/repository"
 )
 
 type OrderService struct {
 	repo repository.OrderRepository
+
+	idCounter int
 }
 
 func NewOrderService(repo repository.OrderRepository) *OrderService {
 	return &OrderService{
-		repo: repo,
+		repo:      repo,
+		idCounter: 0,
 	}
 }
 
@@ -20,6 +25,8 @@ func (s *OrderService) GetOrders() []model.Order {
 }
 
 func (s *OrderService) CreateOrder(order model.Order) model.Order {
+	s.idCounter++
+	order.ID = strconv.Itoa(s.idCounter)
 	return s.repo.Create(order)
 }
 

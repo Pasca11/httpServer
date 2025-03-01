@@ -28,9 +28,14 @@ func (h *OrderHandler) GetOrders(w http.ResponseWriter, r *http.Request) {
 func (h *OrderHandler) CreateOrder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var order model.Order
-	json.NewDecoder(r.Body).Decode(&order)
+	err := json.NewDecoder(r.Body).Decode(&order)
+	if err != nil {
+		http.Error(w, "Ошибка при декодировании данных: "+err.Error(), http.StatusBadRequest)
+		return
+	}
 	createdOrder := h.service.CreateOrder(order)
 	json.NewEncoder(w).Encode(createdOrder)
+
 }
 
 func (h *OrderHandler) GetOrder(w http.ResponseWriter, r *http.Request) {
