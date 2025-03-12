@@ -24,15 +24,14 @@ func main() {
 	router.HandleFunc("/orders", handler.GetOrders).Methods("GET")
 	router.HandleFunc("/orders", handler.CreateOrder).Methods("POST")
 	router.HandleFunc("/orders/{id}", handler.GetOrder).Methods("GET")
-	router.HandleFunc("/orders/{id}/status", handler.UpdateOrderStatus).Methods("PUT")
 
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    ":8082",
 		Handler: router,
 	}
 
 	go func() {
-		log.Printf("Сервер запущен на порту 8080")
+		log.Printf("Сервер запущен на %s", srv.Addr)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Ошибка запуска сервера: %v", err)
 		}

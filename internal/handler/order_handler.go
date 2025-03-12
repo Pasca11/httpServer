@@ -47,16 +47,3 @@ func (h *OrderHandler) GetOrder(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(&model.Order{})
 }
-
-func (h *OrderHandler) UpdateOrderStatus(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	params := mux.Vars(r)
-	var updatedOrder model.Order
-	json.NewDecoder(r.Body).Decode(&updatedOrder)
-
-	if order, found := h.service.UpdateOrderStatus(params["id"], updatedOrder.Status); found {
-		json.NewEncoder(w).Encode(order)
-		return
-	}
-	json.NewEncoder(w).Encode(&model.Order{})
-}

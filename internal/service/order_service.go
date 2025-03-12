@@ -33,7 +33,3 @@ func (s *OrderService) CreateOrder(order model.Order) model.Order {
 func (s *OrderService) GetOrder(id string) (model.Order, bool) {
 	return s.repo.GetByID(id)
 }
-
-func (s *OrderService) UpdateOrderStatus(id string, status string) (model.Order, bool) {
-	return s.repo.UpdateStatus(id, status)
-}
