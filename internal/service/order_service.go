@@ -1,8 +1,10 @@
 package service
 
 import (
+	"log"
 	"strconv"
 
+	pb "github.com/Pasca11/grpcServer/proto/gen"
 	"github.com/Pasca11/waterHTTPServer/internal/model"
 	"github.com/Pasca11/waterHTTPServer/internal/repository"
 )
@@ -24,10 +26,18 @@ func (s *OrderService) GetOrders() []model.Order {
 	return s.repo.GetAll()
 }
 
-func (s *OrderService) CreateOrder(order model.Order) model.Order {
+func (s *OrderService) CreateOrder(order *pb.OrderRequest) model.Order {
+	log.Println(order.TestData[0].BinaryData)
+
 	s.idCounter++
-	order.ID = strconv.Itoa(s.idCounter)
-	return s.repo.Create(order)
+	newOrder := model.Order{
+		ID:              strconv.Itoa(s.idCounter),
+		CustomerName:    order.CustomerName,
+		DeliveryAddress: order.DeliveryAddress,
+		BottlesCount:    order.BottlesCount,
+		PhoneNumber:     order.PhoneNumber,
+	}
+	return s.repo.Create(newOrder)
 }
 
 func (s *OrderService) GetOrder(id string) (model.Order, bool) {

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	pb "github.com/Pasca11/grpcServer/proto/gen"
 	"github.com/Pasca11/waterHTTPServer/internal/model"
 	"github.com/Pasca11/waterHTTPServer/internal/service"
 	"github.com/gorilla/mux"
@@ -27,15 +28,14 @@ func (h *OrderHandler) GetOrders(w http.ResponseWriter, r *http.Request) {
 
 func (h *OrderHandler) CreateOrder(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var order model.Order
+	var order pb.OrderRequest
 	err := json.NewDecoder(r.Body).Decode(&order)
 	if err != nil {
 		http.Error(w, "Ошибка при декодировании данных: "+err.Error(), http.StatusBadRequest)
 		return
 	}
-	createdOrder := h.service.CreateOrder(order)
+	createdOrder := h.service.CreateOrder(&order)
 	json.NewEncoder(w).Encode(createdOrder)
-
 }
 
 func (h *OrderHandler) GetOrder(w http.ResponseWriter, r *http.Request) {
