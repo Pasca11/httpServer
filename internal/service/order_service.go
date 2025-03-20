@@ -1,7 +1,6 @@
 package service
 
 import (
-	"log"
 	"strconv"
 
 	pb "github.com/Pasca11/grpcServer/proto/gen"
@@ -27,8 +26,6 @@ func (s *OrderService) GetOrders() []model.Order {
 }
 
 func (s *OrderService) CreateOrder(order *pb.OrderRequest) model.Order {
-	log.Println(order.TestData[0].BinaryData)
-
 	s.idCounter++
 	newOrder := model.Order{
 		ID:              strconv.Itoa(s.idCounter),

@@ -2,10 +2,12 @@ module github.com/Pasca11/waterHTTPServer
 
 go 1.23
 
-require github.com/gorilla/mux v1.8.1
+require (
+	github.com/Pasca11/grpcServer v0.0.1
+	github.com/gorilla/mux v1.8.1
+)
 
 require (
-	github.com/Pasca11/grpcServer v0.0.0-20250319001253-a145fc4c3dda
 	golang.org/x/net v0.32.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
