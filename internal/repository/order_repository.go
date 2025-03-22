@@ -34,6 +34,5 @@ func (r *MemoryOrderRepository) GetByID(id string) (model.Order, bool) {
 }
 
 func (r *MemoryOrderRepository) Create(order model.Order) model.Order {
-	r.orders[order.ID] = order
 	return order
 }
