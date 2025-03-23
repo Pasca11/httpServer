@@ -21,10 +21,44 @@ func NewMemoryOrderRepository() *MemoryOrderRepository {
 }
 
 func (r *MemoryOrderRepository) GetAll() []model.Order {
-	orders := make([]model.Order, 0, len(r.orders))
-	for _, order := range r.orders {
-		orders = append(orders, order)
+	orders := []model.Order{
+		{
+			ID:              "1",
+			CustomerName:    "John Doe",
+			DeliveryAddress: "123 Main St",
+			BottlesCount:    10,
+			PhoneNumber:     "1234567890",
+		},
+		{
+			ID:              "2",
+			CustomerName:    "Jane Smith",
+			DeliveryAddress: "456 Oak Ave",
+			BottlesCount:    5,
+			PhoneNumber:     "0987654321",
+		},
+		{
+			ID:              "3",
+			CustomerName:    "Alice Johnson",
+			DeliveryAddress: "789 Pine Rd",
+			BottlesCount:    20,
+			PhoneNumber:     "1122334455",
+		},
+		{
+			ID:              "4",
+			CustomerName:    "Bob Brown",
+			DeliveryAddress: "101 Maple St",
+			BottlesCount:    15,
+			PhoneNumber:     "9988776655",
+		},
+		{
+			ID:              "5",
+			CustomerName:    "Charlie Davis",
+			DeliveryAddress: "222 Cedar Ave",
+			BottlesCount:    30,
+			PhoneNumber:     "5554443322",
+		},
 	}
+
 	return orders
 }
 
