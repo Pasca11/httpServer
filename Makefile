@@ -48,3 +48,9 @@ help:
 	@echo "  make test         - Запустить тесты"
 	@echo "  make deps         - Установить зависимости"
 	@echo "  make lint         - Проверить код" 
+
+docker-build:
+	docker build -t http_server:latest .
+
+docker-run:
+	docker run -d -p 8082:8082 http_server
